@@ -1,0 +1,261 @@
+* {
+  margin: 0;
+  box-sizing: border-box; }
+
+html {
+  font-size: 1.1rem;
+  font-family: "Calibri"; }
+
+.separator {
+  width: 1px; }
+
+.link {
+  cursor: pointer;
+  padding: 0px 3px; }
+
+.links {
+  display: flex;
+  flex-wrap: wrap; }
+  .links .link {
+    margin-right: 6px;
+    text-decoration: none;
+    color: #000; }
+    .links .link:hover {
+      text-decoration: underline; }
+
+body {
+  background: #e8e7e3; }
+
+#video-player-container {
+  background: #333a;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  #video-player-container.hidden {
+    display: none; }
+  #video-player-container #video-player-close-button {
+    border: 1px solid #3333;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #fff8;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    #video-player-container #video-player-close-button:focus {
+      background: #fffc; }
+  #video-player-container #video-player {
+    width: 100%;
+    max-width: 90vw;
+    height: 100%;
+    max-height: 90vh; }
+
+.main-wrapper {
+  color: #333;
+  height: max-content;
+  min-height: 100vh;
+  max-width: 1024px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .main-wrapper header {
+    margin-top: 20vh;
+    margin-bottom: 15vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1vh; }
+    .main-wrapper header #header-title {
+      font-family: "Monospace";
+      font-size: clamp(1.5rem, 5vw, 3rem);
+      text-transform: uppercase;
+      font-weight: bolder;
+      letter-spacing: 0.7rem;
+      color: #fff9;
+      text-shadow: 2px 2px 1px #000; }
+    .main-wrapper header .links {
+      font-size: 50px; }
+      .main-wrapper header .links .link {
+        opacity: 0.5; }
+        .main-wrapper header .links .link:hover {
+          opacity: 1; }
+  .main-wrapper section {
+    width: 100%;
+    margin-bottom: 8vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
+    .main-wrapper section .section-title {
+      text-decoration: none;
+      color: inherit;
+      font-size: 1.4rem;
+      font-weight: lighter;
+      padding: 0 1rem; }
+      .main-wrapper section .section-title::before {
+        content: "#";
+        opacity: 0.6;
+        margin-right: 0.4rem; }
+      .main-wrapper section .section-title:hover {
+        text-decoration: underline; }
+    .main-wrapper section .section-contents {
+      padding: 1rem; }
+      .main-wrapper section .section-contents .text-block {
+        padding: 1rem;
+        background: #00000008; }
+  .main-wrapper #projects .section-contents {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly; }
+  .main-wrapper #projects .project {
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    background: #eee;
+    border: 1px solid #3338;
+    color: #111;
+    width: 300px;
+    height: 400px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column; }
+    .main-wrapper #projects .project:not(last-child) {
+      margin-right: 1rem; }
+    .main-wrapper #projects .project.coming-soon {
+      background: #ccc;
+      color: #333;
+      font-weight: bold;
+      font-size: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    .main-wrapper #projects .project .video-button {
+      cursor: pointer;
+      position: absolute;
+      width: 100%;
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .main-wrapper #projects .project .video-button:hover {
+        background: #0004; }
+        .main-wrapper #projects .project .video-button:hover .button {
+          color: #fffc;
+          border-color: #fffc; }
+      .main-wrapper #projects .project .video-button .button {
+        color: #fffb;
+        font-weight: bold;
+        font-size: 3rem;
+        filter: drop-shadow(1px 1px #000); }
+    .main-wrapper #projects .project img {
+      transition: height 0.1s linear;
+      width: 100%;
+      height: 170px;
+      max-width: 100%;
+      max-height: 100%;
+      float: right;
+      justify-self: center;
+      object-fit: contain; }
+    .main-wrapper #projects .project .project-info {
+      background: #eee;
+      overflow: hidden;
+      height: 200px;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column; }
+    .main-wrapper #projects .project .project-title {
+      font-weight: bold;
+      font-size: 1rem; }
+    .main-wrapper #projects .project .project-description {
+      overflow: hidden;
+      opacity: 0.7; }
+    .main-wrapper #projects .project .links {
+      background: rgba(186, 182, 171, 0.2);
+      color: #333;
+      font-size: 24px;
+      height: 30px;
+      transition: height 0.1s linear; }
+      .main-wrapper #projects .project .links .link {
+        opacity: 0.7;
+        text-decoration: none;
+        height: 100%;
+        margin: 0;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center; }
+        .main-wrapper #projects .project .links .link:hover, .main-wrapper #projects .project .links .link:focus {
+          background: #3333;
+          opacity: 1;
+          position: relative; }
+          .main-wrapper #projects .project .links .link:hover::after, .main-wrapper #projects .project .links .link:focus::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            background: #333;
+            color: #fff;
+            top: -2rem;
+            font-size: 0.7rem;
+            padding: 2px 5px;
+            z-index: 1; }
+    .main-wrapper #projects .project .tags {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: auto; }
+      .main-wrapper #projects .project .tags .tag {
+        opacity: 0.7;
+        height: min-content;
+        margin-right: 6px;
+        padding: 2px 3px;
+        font-size: 0.7rem; }
+  .main-wrapper #about .section-contents {
+    font-size: clamp(0.8rem, 5vw, 1.2rem);
+    line-height: 160%; }
+  .main-wrapper #skills .section-contents {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center; }
+    .main-wrapper #skills .section-contents .skill {
+      background: #3331;
+      color: #8888;
+      border-radius: 30%;
+      box-shadow: 5px 5px 5px #0002;
+      width: 100px;
+      height: 100px;
+      margin: 0.5rem 0;
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .main-wrapper #skills .section-contents .skill.main {
+        background: rgba(186, 182, 171, 0.3);
+        color: #855; }
+      .main-wrapper #skills .section-contents .skill i {
+        font-size: 4rem; }
+  .main-wrapper #contact .section-contents {
+    font-size: clamp(0.8rem, 5vw, 1.2rem);
+    line-height: 160%; }
+
+@media only screen and (max-width: 768px) {
+  .project img {
+    height: 165px !important; }
+  .project .links {
+    height: 45px !important; }
+  .project .project-info {
+    height: 190px !important; } }
+
+/*# sourceMappingURL=style.css.map */
