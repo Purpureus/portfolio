@@ -1,0 +1,34 @@
+<h3>CRUD Forum app</h3>
+This article describes some of the decisions I took while making this project. Note that I didn't know any React or Node.js before making it, so I took it as a learning project. I learned an incredible amount of things out of it, and even though I was very familiar with JavaScript and other programming languages, I had quite a few headaches trying to get things to work the best way possible.
+
+The main challenge I faced was dealing with the nature of React. As far as I've seen, React encourages the programmer to structure the program in a way that everything relies on state and side effects. Since I was used to write code in a procedural way (do X, then do Y, then do Z), so I had to make a big mindset shift to be able to write proper React code.
+
+Another lesson I learned is to leave for the end implementing client-side restrictions, such as hiding the "Create post" button while the user isn't logged in. The reason for this is that, when writing the back-end code, I had to check for possible vulnerabilities which could allow a non-authorised user to perform certain actions. Doing so was way more tedious with a restricted interface and, at the end of the day, client-side restrictions are just UX improvements and don't provide any kind of security (anyone can send requests to the server without the client interface).
+
+<b>The useFetch hook</b>
+This hook returns a single function, <div class="inline-code">doFetch</div>, which is defined using <div class="inline-code">useCallback</div> to avoid a rendering loop. <div class="inline-code">doFetch()</div> calls <div class="inline-code">fetch()</div> with the provided URL and options, handles any errors that may occur, converts the data using <div class="inline-code">response.json()</div>, and then calls the provided callback function.
+
+<b>The useLoginData hook</b>
+If the user logs in successfully, the server sends a JWT (JSON web token) to the client, along with some additional info. This token is stored in localStorage and is sent back to the server when the user makes an action that requires them to be authenticated (for example, when editting or deleting a post).
+The sole purpose of this hook is to simplify the act of storing and updating this data. The following is a piece of code
+that is executed when the user tries to log in:
+
+<code>doFetch(url, options, (data, error) =>
+    // ...
+    const newLoginData = {
+        logged: true,
+        username: data.username,
+        accessToken: data.accessToken,
+    }
+    setLoginData(newLoginData)
+    // ...
+)
+</code>
+<b>The post draft</b>
+When the user is writing a post, they might leave the page and lose what they were writing. While it might be fine to just throw a warning if the user is about to leave, I decided to make something a bit more original and implement a post draft which is automatically saved in session storage.
+
+The draft is saved 1.5s after the user stops typing, or when the user leaves the page. This was implemented by defining a timeout inside a <div class="inline-code">useRef</div>, and refreshing it every time the user types.
+When the post creation page is opened, the saved draft is loaded.
+
+<b>Dealing with expired tokens</b>
+When submitting a post, the stored access token may be expired. In that case, the server returns an accessTokenInvalid message and a login form pops up. After successfully logging in, the post contents are preserved, since no page changes occur in the process.

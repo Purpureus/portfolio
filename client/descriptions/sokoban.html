@@ -1,0 +1,66 @@
+<h3>Sokoban</h3>
+<b>Input handling</b>
+The raw input (key up/down, tap start/end) is stored in an array. All input methods are blended together in this step:
+
+<code>mobileButtonUp.addEventListener("touchstart", () =>
+	rawInput[KEY_W] = 1
+)
+mobileButtonUp.addEventListener("touchend", () =>
+	rawInput[KEY_W] = 0
+)
+
+document.onkeyup = (e) => {
+	switch (e.key) {
+		case "w": case "W": case "ArrowUp":
+			rawInput[KEY_W] = 0
+			break
+	}
+}
+</code>
+Now the relative input state, which represents the four possible states of a key (pressed, down, up, and released), is
+calculated. This is done by storing the previous frame's input state and matching it with the current one.
+
+<code>UP   && DOWN = PRESSED
+DOWN && UP   = RELEASED
+UP   && UP   = UP
+DOWN && DOWN = DOWN</code>
+Then for example, to know if the user has just released the left key (which also encompasses the 'A' key and the left
+button for mobile) we'd use this code:
+
+<code>isReleased(input[KEY_A])</code>
+<b>Entity system</b>
+There are two objects which store references to the entities in the game:
+• The layers array, used for rendering each layer in order
+• The entity map, used for accessing the tiles by index. Each tile here is an array which may contain several entities
+Additionally, a reference to the player entity is stored in a constant.
+
+<b>Pushing entities</b>
+For the sake of simplicity, the function for moving the player is the same as the function for pushing a crate. It could
+be summarized in these steps:
+<ol>
+	<li>Check if there is a solid, not pushable object in the target tile. If so, return false.</li>
+	<li>If it's a solid but pushable object, try to push the next tile - if it's not possible, the former entity is not pushed either (crates cannot be pushed successively)</li>
+	<li>Calculate the new entity position, both in tilemap units and in pixels</li>
+	<li>Update the entity data</li>
+	<li>Pop the entity's reference from its old position in the entity map, and push it on its new position. Note: the unique entity ID is used here to distinguish the entity which should be removed from the others in the same tile.</li>
+</ol>
+<b>Rewind system</b>
+The rewind system is very basic: each time the user presses a movement key, a snapshot of the current state of the game
+is pushed at the top of an array. If the user presses the 'Z' key, the snapshot at the top of the array is popped from
+it and used as the new game state.
+
+What I learned - while making the rewind system I had to deal with JavaScript's copying by value vs. reference. The
+problem was, if I copied an snapshot by reference, all of the snapshots would be the same - and if I did a deep copy
+using the JSON functions, the references to the objects in the game would be lost. So the solution I found was to copy
+each value of the snapshot manually.
+
+<b>Rendering</b>
+For rendering, WebGL asks for a series of vertices which are going to be used by the shaders. The following function
+takes an entity and a target array, grabs the entity's coordinates, texture UVs, and lighting value, and pushes all
+these data to the target array in the correct format.
+The indices for the vertices are then calculated and passed to the shaders.
+
+The shaders are quite simple.
+The vertex shader takes the canvas resolution and vertex position in pixels, and calculates the normalized gl_Position
+value.
+The fragment shader takes the texture data and calculates the gl_FragColor value.

@@ -1,219 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="./style/style.css" />
-		<link
-			rel="stylesheet"
-			href="./style/line-awesome/css/line-awesome.min.css"
-		/>
-		<script defer src="./main.js"></script>
-		<title>Purpureus' portfolio</title>
-	</head>
-	<body>
-		<div id="video-player-container" class="hidden">
-			<button id="video-player-close-button">X</button>
-			<iframe
-				id="video-player"
-				src=""
-				title="Video player"
-				frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write;
+
+<head>
+	<base id="server-url" href="https://purpureusdesign.com/portfolio/" />
+	<!--<base id="server-url"
+		href="http://localhost:8000" />-->
+	<meta charset="UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet"
+		href="./style/style.css" />
+	<link rel="stylesheet"
+		href="./style/line-awesome/css/line-awesome.min.css" />
+	<script defer
+		src="./main.js"></script>
+	<title>Purpureus' portfolio</title>
+</head>
+
+<body>
+	<div id="video-player-container"
+		class="hidden">
+		<button id="video-player-close-button"
+			class="popup-close-button">
+			X
+		</button>
+		<iframe id="video-player"
+			src=""
+			title="Video player"
+			frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write;
 				encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen
-			></iframe>
-		</div>
-		<div class="main-wrapper">
-			<header>
-				<h1 id="header-title">Purpureus</h1>
-				<div class="links">
-					<a class="link" href="#contact"
-						><i class="las la-envelope"></i
-					></a>
-					<a
-						class="link"
-						target="_blank"
-						href="https://github.com/purpureus"
-						><i class="lab la-github"></i
-					></a>
-				</div>
-			</header>
+			allowfullscreen></iframe>
+	</div>
 
-			<section id="projects">
-				<a href="#projects" class="section-title">Projects</a>
-				<div class="section-contents">
-					<div class="project">
-						<img
-							src="./images/sokoban_img_1.png"
-							alt="sokoban demo"
-							class="project-image"
-						/>
+	<div id="reader-container"
+		class="hidden">
+		<button id="reader-close-button"
+			class="popup-close-button">
+			X
+		</button>
+		<div id="reader"></div>
+	</div>
 
-						<div class="links">
-							<a
-								href="https://github.com/Purpureus/sokoban"
-								target="_blank"
-								class="link"
-								data-tooltip="Code"
-								><i class="las la-code"></i
-							></a>
-							<a
-								href=""
-								target="_blank"
-								class="link"
-								data-tooltip="Project"
-								><i class="las la-desktop"></i
-							></a>
-						</div>
+	<div class="main-wrapper">
+		<header>
+			<h1 id="header-title"><a href="">Purpureus</a></h1>
+			<div class="links">
+				<a class="link"
+					href="#contact"><i class="las la-envelope"></i></a>
+				<a class="link"
+					target="_blank"
+					href="https://github.com/purpureus"><i class="lab la-github"></i></a>
+			</div>
+		</header>
 
-						<div class="project-info">
-							<h3 class="project-title">Sokoban</h3>
-							<p class="project-description">
-								A JavaScript/WebGL implementation of the classic
-								Sokoban game.
-							</p>
-							<div class="tags">
-								<p class="tag">JavaScript</p>
-								<p class="tag">WebGL/GLSL</p>
-							</div>
+		<section id="projects">
+			<a href="#projects"
+				class="section-title">Projects</a>
+			<div class="section-contents">
+				<div class="project">
+					<img src="./images/sokoban_img.png"
+						alt="sokoban demo"
+						class="project-image" />
+
+					<div class="video-button"
+						data-url="https://www.youtube.com/embed/kgwG3Kxml_M">
+						<div class="button">
+							<i class="las la-play"></i>
 						</div>
 					</div>
 
-					<div class="project">
-						<img
-							src="./images/forum_img_1.png"
-							alt="forum demo"
-							class="project-image"
-						/>
-
-						<div
-							class="video-button"
-							data-url="https://www.youtube.com/embed/nxuoieTdEnY"
-						>
-							<div class="button">
-								<i class="las la-play"></i>
-							</div>
-						</div>
-
-						<div class="links">
-							<a
-								href="https://github.com/Purpureus/mern-forum"
-								target="_blank"
-								data-tooltip="Code"
-								class="link"
-								><i class="las la-code"></i
-							></a>
-							<a
-								href=""
-								target="_blank"
-								data-tooltip="Project"
-								class="link"
-								><i class="las la-desktop"></i
-							></a>
-						</div>
-
-						<div class="project-info">
-							<h3 class="project-title">
-								React forum (CRUD app)
-							</h3>
-							<p class="project-description">
-								A basic React/Express CRUD app with JWT
-								authentication.
-							</p>
-							<div class="tags">
-								<p class="tag">Sass</p>
-								<p class="tag">React</p>
-								<p class="tag">Express</p>
-							</div>
+					<div class="links">
+						<a href="https://github.com/Purpureus/sokoban"
+							target="_blank"
+							class="link"
+							data-tooltip="Code"><i class="las la-code"></i></a>
+						<a href="../sokoban"
+							target="_blank"
+							class="link"
+							data-tooltip="Project"><i class="las la-desktop"></i></a>
+						<div class="link info-button"
+							data-url="descriptions/sokoban.html"
+							data-tooltip="Info">
+							<i class="las la-info-circle"></i>
 						</div>
 					</div>
 
-					<div class="project">
-						<img
-							src="./images/fontbrowser_img_1.png"
-							alt="font browser demo"
-							class="project-image"
-						/>
-						<a
-							href=""
-							class="video-button"
-							data-url="https://www.youtube.com/embed/-B09H2S8KGc"
-						>
-							<div class="button">
-								<i class="las la-play"></i>
-							</div>
-						</a>
-
-						<div class="links">
-							<a
-								href="https://github.com/Purpureus/font-browser"
-								target="_blank"
-								data-tooltip="Code"
-								class="link"
-								><i class="las la-code"></i
-							></a>
-							<a href="" class="link" data-tooltip="Project"
-								><i class="las la-desktop"></i
-							></a>
-						</div>
-
-						<div class="project-info">
-							<h3 class="project-title">Google fonts browser</h3>
-							<p class="project-description">
-								A basic React/Express CRUD app with JWT
-								authentication.
-							</p>
-							<div class="tags">
-								<p class="tag">Javascript</p>
-							</div>
+					<div class="project-info">
+						<h3 class="project-title">Sokoban</h3>
+						<p class="project-description">
+							A JavaScript/WebGL implementation of the classic
+							Sokoban game.
+						</p>
+						<div class="tags">
+							<p class="tag">JavaScript</p>
+							<p class="tag">WebGL/GLSL</p>
 						</div>
 					</div>
 				</div>
-			</section>
 
-			<section id="about">
-				<a href="#about" class="section-title">About</a>
-				<div class="section-contents">
-					<p class="text-block">
-						I am Frederick, a developer who loves building software
-						and learning how things work under the hood.
-						<br />
-						In 2015 I started learning Java and in 2018 I made some
-						small programs in C, but I only in 2020 I got serious
-						about software development. I took a more focused and
-						practical approach, and started learning JavaScript.
-					</p>
-				</div>
-			</section>
+				<div class="project">
+					<img src="./images/forum_img.png"
+						alt="forum demo"
+						class="project-image" />
 
-			<section id="skills">
-				<a href="" class="section-title">Skills</a>
-				<div class="section-contents">
-					<div class="main skill">
-						<i class="lab la-js-square"></i>
+					<div class="video-button"
+						data-url="https://www.youtube.com/embed/YeqhmF_aMM0">
+						<div class="button">
+							<i class="las la-play"></i>
+						</div>
 					</div>
-					<div class="main skill">
-						<i class="lab la-sass"></i>
-					</div>
-					<div class="main skill">
-						<i class="lab la-react"></i>
-					</div>
-					<div class="skill">
-						<i class="lab la-node-js"></i>
-					</div>
-				</div>
-			</section>
 
-			<section id="contact">
-				<a href="#contact" class="section-title">Contact</a>
-				<div class="section-contents">
-					<p class="text-block">
-						You can contact me by email (purpureusdesign [at] gmail
-						[dot] com)
-					</p>
+					<div class="links">
+						<a href="https://github.com/Purpureus/mern-forum"
+							target="_blank"
+							data-tooltip="Code"
+							class="link"><i class="las la-code"></i></a>
+						<a href="../forum"
+							target="_blank"
+							data-tooltip="Project"
+							class="link"><i class="las la-desktop"></i></a>
+						<div class="link info-button"
+							data-url="descriptions/forum.html"
+							data-tooltip="Info">
+							<i class="las la-info-circle"></i>
+						</div>
+					</div>
+
+					<div class="project-info">
+						<h3 class="project-title">
+							React forum (CRUD app)
+						</h3>
+						<p class="project-description">
+							A basic React/Express CRUD app with JWT
+							authentication.
+						</p>
+						<div class="tags">
+							<p class="tag">Sass</p>
+							<p class="tag">React</p>
+							<p class="tag">Express</p>
+						</div>
+					</div>
 				</div>
-			</section>
-		</div>
-	</body>
+
+				<div class="project">
+					<img src="./images/fontbrowser_img.png"
+						alt="font browser demo"
+						class="project-image" />
+					<a href=""
+						class="video-button"
+						data-url="https://www.youtube.com/embed/N55qHXmVGrU">
+						<div class="button">
+							<i class="las la-play"></i>
+						</div>
+					</a>
+
+					<div class="links">
+						<a href="https://github.com/Purpureus/font-browser/"
+							target="_blank"
+							data-tooltip="Code"
+							class="link"><i class="las la-code"></i></a>
+						<a href="../fontbrowser/"
+							target="_blank"
+							class="link"
+							data-tooltip="Project"><i class="las la-desktop"></i></a>
+					</div>
+
+					<div class="project-info">
+						<h3 class="project-title">Google fonts browser</h3>
+						<p class="project-description">
+							A basic React/Express CRUD app with JWT
+							authentication.
+						</p>
+						<div class="tags">
+							<p class="tag">Javascript</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="about">
+			<a href="#about"
+				class="section-title">About</a>
+			<div class="section-contents">
+				<div class="text-block">
+					I am Frederick, a web developer who loves building
+					software and learning how things work under the hood. I
+					taught myself by making projects and practicing
+					everything I learn.
+					<br />
+					<ul>
+						<li>
+							<b>2018</b> - learned the basics of
+							<span class="keyword">Java</span>,
+							<span class="keyword">HTML</span>
+							and
+							<span class="keyword">CSS</span>.
+						</li>
+						<li>
+							<b>2019</b> - learned the basics of
+							<span class="keyword">C</span>
+							and
+							<span class="keyword">OpenGL</span>.
+							<i>Projects built: simple particle system.</i>
+						</li>
+						<li>
+							<b>2020</b> - decided to go the web development
+							route: learned
+							<span class="keyword">Sass</span>,
+							<span class="keyword">JavaScript</span>,
+							<span class="keyword">Git</span>
+							and
+							<span class="keyword">Wordpress</span>. Kept
+							improving my HTML and CSS skills.
+							<i>Projects built: Wordpress theme, JS
+								Calculator</i>
+						</li>
+						<li>
+							<b>2021</b> - tried Vue and React, but opted for
+							the latter. Learned the basics of
+							<span class="keyword">Node.js</span>
+							and Express while developing my React skills.
+							While uploading this portfolio, used
+							<span class="keyword">Nginx</span>
+							and the Linux command line.
+							<i>Projects built: sokoban, forum, portfolio</i>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section id="skills">
+			<a href="#skills"
+				class="section-title">Main skills</a>
+			<div class="section-contents">
+				<div class="main skill">
+					<i class="lab la-js-square"></i>
+				</div>
+				<div class="main skill">
+					<i class="lab la-sass"></i>
+				</div>
+				<div class="main skill">
+					<i class="lab la-react"></i>
+				</div>
+				<div class="skill">
+					<i class="lab la-node-js"></i>
+				</div>
+			</div>
+		</section>
+
+		<section id="contact">
+			<a href="#contact"
+				class="section-title">Contact</a>
+			<div class="section-contents">
+				<p class="text-block">
+					You can contact me by email (purpureusdesign [at] gmail
+					[dot] com)
+				</p>
+			</div>
+		</section>
+	</div>
+</body>
+
 </html>
