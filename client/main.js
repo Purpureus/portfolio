@@ -45,6 +45,7 @@ function closePlayer() {
 function openReader(url) {
 	body.classList.toggle('noscroll', true)
 	readerContainer.classList.remove("hidden")
+	reader.focus()
 	loadHtmlToReader(url)
 }
 function closeReader() {
@@ -86,15 +87,24 @@ projects.forEach((project) => {
 		}
 	}
 
-	const infoButton = project.querySelector(".info-button")
-	if (infoButton) {
-		const url = `${SERVER_URL}/${infoButton.dataset.url}`
-		if (url) {
-			infoButton.addEventListener("click", (e) => {
-				e.preventDefault()
-				openReader(url)
-			})
-		}
+	const infoButtons = toArray(project.getElementsByClassName("info-button"))
+	if (infoButtons) {
+		infoButtons.forEach((infoButton) => {
+			if (infoButton) {
+				const url = `${SERVER_URL}/${infoButton.dataset.url}`
+				if (url) {
+					infoButton.addEventListener("keyup", (e) => {
+						e.preventDefault()
+						if (e.key == 'Enter') infoButton.click()
+					})
+					infoButton.addEventListener("click", (e) => {
+						e.preventDefault()
+						openReader(url)
+						infoButton.blur()
+					})
+				}
+			}
+		})
 	}
 })
 

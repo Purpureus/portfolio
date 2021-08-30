@@ -24,43 +24,63 @@ calculated. This is done by storing the previous frame's input state and matchin
 DOWN && UP   = RELEASED
 UP   && UP   = UP
 DOWN && DOWN = DOWN</code>
-Then for example, to know if the user has just released the left key (which also encompasses the 'A' key and the left
-button for mobile) we'd use this code:
+Then for example, to know if the user has just released the left key, 'A' key, or left button, we'd use this code:
 
-<code>isReleased(input[KEY_A])</code>
+<code>if( isReleased(input[KEY_A]) ) { ... }</code>
 <b>Entity system</b>
 There are two objects which store references to the entities in the game:
 • The layers array, used for rendering each layer in order
-• The entity map, used for accessing the tiles by index. Each tile here is an array which may contain several entities
-Additionally, a reference to the player entity is stored in a constant.
+• The entity map, used for accessing the tiles by coordinates. Each tile here is an array which may contain several entities.
+Additionally there's a constant storing a handle to the player entity, for easy access.
 
 <b>Pushing entities</b>
-For the sake of simplicity, the function for moving the player is the same as the function for pushing a crate. It could
-be summarized in these steps:
+For the sake of simplicity and cleanliness, the same function (<div class="inline-code">pushEntity</div>) is used for both moving the player and pushing crates. This function can be summarized in the following steps:
 <ol>
-	<li>Check if there is a solid, not pushable object in the target tile. If so, return false.</li>
-	<li>If it's a solid but pushable object, try to push the next tile - if it's not possible, the former entity is not pushed either (crates cannot be pushed successively)</li>
-	<li>Calculate the new entity position, both in tilemap units and in pixels</li>
-	<li>Update the entity data</li>
-	<li>Pop the entity's reference from its old position in the entity map, and push it on its new position. Note: the unique entity ID is used here to distinguish the entity which should be removed from the others in the same tile.</li>
+	<li>Check if there's a solid, not pushable object in the target tile. If so, return false.</li>
+	<li>If there's a solid but pushable object, try to push the next tile - if that's impossible, the previously evaluated entity is not pushed either (crates cannot be pushed successively)</li>
+	<li>Calculate the entity's new position, both in tilemap units and in pixels</li>
+	<li>Update the entity's data</li>
+	<li>Move the entity's reference from the old position array in the entity map to the new one. Note: the unique entity ID is used here to distinguish the entity which should be removed from others in the same tile.</li>
 </ol>
 <b>Rewind system</b>
-The rewind system is very basic: each time the user presses a movement key, a snapshot of the current state of the game
-is pushed at the top of an array. If the user presses the 'Z' key, the snapshot at the top of the array is popped from
-it and used as the new game state.
+The rewind system is very basic: each time the player moves the character, a snapshot of the current state of the game is pushed at the top of the <div class="inline-code">history</div> array. If the 'Z' key is pressed, the snapshot at the top of the array is popped and used as the new game state.
 
-What I learned - while making the rewind system I had to deal with JavaScript's copying by value vs. reference. The
-problem was, if I copied an snapshot by reference, all of the snapshots would be the same - and if I did a deep copy
-using the JSON functions, the references to the objects in the game would be lost. So the solution I found was to copy
-each value of the snapshot manually.
+<i>What I learned - while making the rewind system I had to deal with JavaScript's way of copying by value vs. reference. The problem was that if I copied an snapshot by reference, all of the snapshots would be the same - and if I did a deep copy using the JSON functions, the references to the entities in the game would be lost. So the solution I found was to copy the values of the snapshot's entities one by one.</i>
 
 <b>Rendering</b>
-For rendering, WebGL asks for a series of vertices which are going to be used by the shaders. The following function
-takes an entity and a target array, grabs the entity's coordinates, texture UVs, and lighting value, and pushes all
-these data to the target array in the correct format.
+For rendering, WebGL asks for a series of vertices which are going to be used by the shaders. The following function takes an entity and a target array, grabs the entity's coordinates, texture UVs, and lighting value, and pushes all these data to the target array in the correct format:
+
+<code>function fillEntityVertexData(target, entity)
+{
+	// Calculate edges
+	let x = entity.pos.x
+	let y = entity.pos.y
+	let x0 = x
+	let x1 = x + TILE_SIZE
+	let y0 = y
+	let y1 = y + TILE_SIZE
+
+	// Get the entity's full texture UV
+	// (only the top left and bottom right corners are stored)
+	let cornersUV = entity.cornersUV
+	completeUV = getUVFromCorners(cornersUV[0], cornersUV[1])
+
+	let lightValue = accessArrayAs2D(lightingMap, entity.tilePos, tilemapWidth)
+
+	target.push(
+		x0, y0, ...completeUV[0], lightValue,
+		x1, y0, ...completeUV[1], lightValue,
+		x0, y1, ...completeUV[2], lightValue,
+		x1, y1, ...completeUV[3], lightValue
+	)
+}</code>
 The indices for the vertices are then calculated and passed to the shaders.
 
-The shaders are quite simple.
-The vertex shader takes the canvas resolution and vertex position in pixels, and calculates the normalized gl_Position
-value.
-The fragment shader takes the texture data and calculates the gl_FragColor value.
+The vertex shader takes the canvas resolution and vertex position in pixels, and calculates the normalized gl_Position value. Then the fragment shader takes the texture data and calculates the gl_FragColor value.
+
+<a class="link painted"
+	target="_blank"
+	href="https://github.com/Purpureus/sokoban">Full code on GitHub</a>
+<a href="../sokoban"
+	target="_blank"
+	class="link painted">Live Project</a>

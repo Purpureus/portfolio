@@ -3,8 +3,6 @@
 
 <head>
 	<base id="server-url" href="https://purpureusdesign.com/portfolio/" />
-	<!--<base id="server-url"
-		href="http://localhost:8000" />-->
 	<meta charset="UTF-8" />
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0" />
@@ -39,12 +37,14 @@
 			class="popup-close-button">
 			X
 		</button>
-		<div id="reader"></div>
+		<div id="reader"
+			tabindex=0></div>
 	</div>
 
 	<div class="main-wrapper">
 		<header>
 			<h1 id="header-title"><a href="">Purpureus</a></h1>
+			<h2 id="header-subtitle">Web developer</h2>
 			<div class="links">
 				<a class="link"
 					href="#contact"><i class="las la-envelope"></i></a>
@@ -73,25 +73,35 @@
 					<div class="links">
 						<a href="https://github.com/Purpureus/sokoban"
 							target="_blank"
-							class="link"
-							data-tooltip="Code"><i class="las la-code"></i></a>
+							class="link">
+							<i class="las la-code"></i>
+							<span class="tooltip">Code</span>
+						</a>
 						<a href="../sokoban"
 							target="_blank"
-							class="link"
-							data-tooltip="Project"><i class="las la-desktop"></i></a>
+							class="link">
+							<i class="las la-desktop"></i>
+							<span class="tooltip">Project</span>
+						</a>
 						<div class="link info-button"
-							data-url="descriptions/sokoban.html"
-							data-tooltip="Info">
+							tabindex=0
+							data-url="descriptions/sokoban.html">
 							<i class="las la-info-circle"></i>
+							<span class="tooltip">Info</span>
 						</div>
 					</div>
 
 					<div class="project-info">
 						<h3 class="project-title">Sokoban</h3>
-						<p class="project-description">
+						<div class="project-description">
 							A JavaScript/WebGL implementation of the classic
 							Sokoban game.
-						</p>
+							<div class="link painted info-button"
+								tabindex=0
+								data-url="descriptions/sokoban.html">
+								Read more...
+							</div>
+						</div>
 						<div class="tags">
 							<p class="tag">JavaScript</p>
 							<p class="tag">WebGL/GLSL</p>
@@ -114,16 +124,21 @@
 					<div class="links">
 						<a href="https://github.com/Purpureus/mern-forum"
 							target="_blank"
-							data-tooltip="Code"
-							class="link"><i class="las la-code"></i></a>
+							class="link">
+							<i class="las la-code"></i>
+							<span class="tooltip">Code</span>
+						</a>
 						<a href="../forum"
 							target="_blank"
-							data-tooltip="Project"
-							class="link"><i class="las la-desktop"></i></a>
+							class="link">
+							<i class="las la-desktop"></i>
+							<span class="tooltip">Project</span>
+						</a>
 						<div class="link info-button"
-							data-url="descriptions/forum.html"
-							data-tooltip="Info">
+							tabindex=0
+							data-url="descriptions/forum.html">
 							<i class="las la-info-circle"></i>
+							<span class="tooltip">Info</span>
 						</div>
 					</div>
 
@@ -131,10 +146,15 @@
 						<h3 class="project-title">
 							React forum (CRUD app)
 						</h3>
-						<p class="project-description">
+						<div class="project-description">
 							A basic React/Express CRUD app with JWT
 							authentication.
-						</p>
+							<div class="link painted info-button read-more"
+								tabindex=0
+								data-url="descriptions/forum.html">
+								Read more...
+							</div>
+						</div>
 						<div class="tags">
 							<p class="tag">Sass</p>
 							<p class="tag">React</p>
@@ -159,23 +179,54 @@
 						<a href="https://github.com/Purpureus/font-browser/"
 							target="_blank"
 							data-tooltip="Code"
-							class="link"><i class="las la-code"></i></a>
+							class="link">
+							<i class="las la-code"></i>
+							<span class="tooltip">Code</span>
+						</a>
 						<a href="../fontbrowser/"
 							target="_blank"
-							class="link"
-							data-tooltip="Project"><i class="las la-desktop"></i></a>
+							class="link">
+							<i class="las la-desktop"></i>
+							<span class="tooltip">Project</span>
+						</a>
 					</div>
 
 					<div class="project-info">
 						<h3 class="project-title">Google fonts browser</h3>
 						<p class="project-description">
-							A basic React/Express CRUD app with JWT
-							authentication.
+							A tool to search and preview fonts from Google Fonts.
 						</p>
 						<div class="tags">
 							<p class="tag">Javascript</p>
 						</div>
 					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="skills">
+			<a href="#skills"
+				class="section-title">Main skills</a>
+			<div class="section-contents">
+				<div class="main skill"
+					tabindex=0>
+					<i class="lab la-js-square"></i>
+					<span class="skill-name">JavaScript</span>
+				</div>
+				<div class="main skill"
+					tabindex=0>
+					<i class="lab la-sass"></i>
+					<span class="skill-name">Sass</span>
+				</div>
+				<div class="main skill"
+					tabindex=0>
+					<i class="lab la-react"></i>
+					<span class="skill-name">React</span>
+				</div>
+				<div class="skill"
+					tabindex=0>
+					<i class="lab la-node-js"></i>
+					<span class="skill-name">Node.js</span>
 				</div>
 			</div>
 		</section>
@@ -189,6 +240,7 @@
 					software and learning how things work under the hood. I
 					taught myself by making projects and practicing
 					everything I learn.
+
 					<br />
 					<ul>
 						<li>
@@ -198,13 +250,15 @@
 							and
 							<span class="keyword">CSS</span>.
 						</li>
+
 						<li>
 							<b>2019</b> - learned the basics of
 							<span class="keyword">C</span>
 							and
 							<span class="keyword">OpenGL</span>.
-							<i>Projects built: simple particle system.</i>
+							<i>Projects built: simple particle system. Learning sources: Handmade Hero by Casey Muratori, Learn OpenGL by Joey DeVries</i>
 						</li>
+
 						<li>
 							<b>2020</b> - decided to go the web development
 							route: learned
@@ -217,36 +271,19 @@
 							<i>Projects built: Wordpress theme, JS
 								Calculator</i>
 						</li>
+
 						<li>
 							<b>2021</b> - tried Vue and React, but opted for
 							the latter. Learned the basics of
 							<span class="keyword">Node.js</span>
-							and Express while developing my React skills.
-							While uploading this portfolio, used
+							and <span class="keyword">Express</span>
+							while developing my React skills. While uploading this portfolio, used
 							<span class="keyword">Nginx</span>
 							and the Linux command line.
-							<i>Projects built: sokoban, forum, portfolio</i>
+							<i>Projects built: Sokoban, Forum, Portfolio. Learning
+								sources: Traversy Media Youtube channel</i>
 						</li>
 					</ul>
-				</div>
-			</div>
-		</section>
-
-		<section id="skills">
-			<a href="#skills"
-				class="section-title">Main skills</a>
-			<div class="section-contents">
-				<div class="main skill">
-					<i class="lab la-js-square"></i>
-				</div>
-				<div class="main skill">
-					<i class="lab la-sass"></i>
-				</div>
-				<div class="main skill">
-					<i class="lab la-react"></i>
-				</div>
-				<div class="skill">
-					<i class="lab la-node-js"></i>
 				</div>
 			</div>
 		</section>
@@ -256,8 +293,7 @@
 				class="section-title">Contact</a>
 			<div class="section-contents">
 				<p class="text-block">
-					You can contact me by email (purpureusdesign [at] gmail
-					[dot] com)
+					You can contact me by email (<a href="mailto:purpureusdesign@gmail.com">purpureusdesign@gmail.com</a>)
 				</p>
 			</div>
 		</section>
